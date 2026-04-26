@@ -7,63 +7,25 @@
       <p>Inicia sesión para continuar</p>
     </div>
 
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-
-      <div class="alert-error" *ngIf="errorMessage">
-        <i class="fas fa-exclamation-circle"></i> {{ errorMessage }}
-      </div>
-
-
+    <form (ngSubmit)="login()" #loginForm="ngForm">
       <div class="form-group">
         <label><i class="fas fa-envelope"></i> Correo electrónico</label>
-        <input
-          type="email"
-          formControlName="email"
-          placeholder="tu@email.com"
-          [class.error]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-        <div class="error-message" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-          <span *ngIf="loginForm.get('email')?.errors?.['required']">El correo es requerido</span>
-          <span *ngIf="loginForm.get('email')?.errors?.['email']">Ingresa un correo válido</span>
-        </div>
+        <input type="email" id="username" name="username" class="form-control" [(ngModel)]="form.username" required />
       </div>
 
 
       <div class="form-group">
         <label><i class="fas fa-lock"></i> Contraseña</label>
-        <div class="password-input">
-          <input
-            [type]="showPassword ? 'text' : 'password'"
-            formControlName="password"
-            placeholder="Mínimo 6 caracteres"
-            [class.error]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-          <button type="button" class="toggle-password" (click)="togglePassword()">
-            <i class="fas" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"></i>
-          </button>
-        </div>
-        <div class="error-message" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-          <span *ngIf="loginForm.get('password')?.errors?.['required']">La contraseña es requerida</span>
-          <span *ngIf="loginForm.get('password')?.errors?.['minlength']">Mínimo 6 caracteres</span>
-        </div>
+        <input type="password" id="password" name="password" class="form-control" [(ngModel)]="form.password" required />
       </div>
 
-
-      <div class="form-options">
-        <label class="checkbox">
-          <input type="checkbox" formControlName="rememberMe">
-          <span>Recordarme</span>
-        </label>
-        <a href="#" class="forgot-password" (click)="$event.preventDefault()">¿Olvidaste tu contraseña?</a>
-      </div>
-
-
-      <button type="submit" class="btn-login-submit" [disabled]="loginForm.invalid || isLoading">
-        <i class="fas fa-spinner fa-spin" *ngIf="isLoading"></i>
-        <span *ngIf="!isLoading">Iniciar sesión</span>
+      <button type="submit" class="btn-login-submit">
+        <span>Iniciar sesión</span>
       </button>
 
 
       <p class="login-footer">
-        ¿No tienes cuenta? <a routerLink="/register">Regístrate aquí</a>
+        ¿No tienes cuenta? <a routerLink="/registro">Regístrate aquí</a>
       </p>
     </form>
   </div>
